@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For CHOTTUUSS ❤️</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
+body{
+  background:linear-gradient(to bottom,#ff4e78,#ff9a9e);
+  min-height:100vh;
+  color:white;
+  overflow-x:hidden;
+}
+.container{
+  text-align:center;
+  padding:30px 15px;
+}
+
+/* Name glow + heartbeat */
+.name{
+  font-size:3rem;
+  margin-bottom:15px;
+  animation:glow 2s infinite alternate,heartbeat 1.8s infinite;
+}
+@keyframes glow{
+  from{text-shadow:0 0 10px #fff}
+  to{text-shadow:0 0 30px #ffd6e0}
+}
+@keyframes heartbeat{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.08)}
+}
+
+/* Typing */
+#typing{
+  font-size:1.2rem;
+  min-height:50px;
+  margin-bottom:30px;
+}
+
+/* Cards */
+.card{
+  background:rgba(255,255,255,.15);
+  border-radius:20px;
+  padding:20px;
+  margin:25px auto;
+  max-width:420px;
+  box-shadow:0 10px 25px rgba(0,0,0,.3);
+  animation:fade 2s forwards;
+}
+.card img{
+  width:100%;
+  border-radius:15px;
+  margin-bottom:12px;
+}
+.card p{font-size:1.1rem}
+
+@keyframes fade{to{opacity:1}}
+
+/* Hug */
+.hug{
+  font-size:2.2rem;
+  margin:35px 0;
+  animation:hug 2s infinite alternate;
+}
+@keyframes hug{
+  from{transform:scale(1)}
+  to{transform:scale(1.15)}
+}
+
+/* Proposal */
+.proposal h2{font-size:1.8rem;margin-bottom:20px}
+button{
+  padding:14px 30px;
+  font-size:1.1rem;
+  border:none;
+  border-radius:30px;
+  margin:8px;
+  cursor:pointer;
+}
+.yes{background:#ffccd5;color:#c9184a}
+.no{
+  background:white;
+  color:#c9184a;
+  position:relative;
+}
+
+/* Falling */
+.falling span{
+  position:fixed;
+  top:-10%;
+  font-size:22px;
+  animation:fall linear infinite;
+}
+@keyframes fall{
+  to{transform:translateY(120vh);opacity:0}
+}
+
+/* Confetti */
+.confetti{
+  position:fixed;
+  width:10px;
+  height:10px;
+  top:-10px;
+  animation:confetti 3s linear forwards;
+}
+@keyframes confetti{
+  to{transform:translateY(110vh) rotate(360deg);opacity:0}
+}
+
+/* Mobile */
+@media(max-width:480px){
+  .name{font-size:2.5rem}
+  .proposal h2{font-size:1.5rem}
+}
+</style>
+</head>
+
+<body>
+
+<div class="falling"></div>
+
+<audio id="music" autoplay loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<div class="container">
+
+  <div class="name">CHOTTUUSS 💖</div>
+
+  <div id="typing"></div>
+
+  <!-- UPDATED CARDS WITH IMAGES -->
+
+  <div class="card">
+    <img src="meet.jpg" alt="How we met">
+    <p>
+      Free Fire gave me more than a game…  
+      it gave me <b>you</b> 🎮❤️
+    </p>
+  </div>
+
+  <div class="card">
+    <img src="fall.jpg" alt="Falling for you">
+    <p>
+      I didn’t expect it…  
+      but my heart slowly chose you 💘
+    </p>
+  </div>
+
+  <div class="card">
+    <img src="proposal.jpg" alt="My Valentine">
+    <p>
+      Today I just want to ask you one thing…  
+      will you be my Valentine? 🌹
+    </p>
+  </div>
+
+  <div class="hug">🤗💋<br>I wish I could hug you right now</div>
+
+  <div class="proposal">
+    <h2>Will you be my Valentine, CHOTTUUSS? 💍</h2>
+    <button class="yes" onclick="yes()">Yes 💕</button>
+    <button class="no" id="no">No 😌</button>
+  </div>
+
+  <p id="response"></p>
+
+</div>
+
+<script>
+// Typing
+const lines=[
+"Hey CHOTTUUSS…",
+"I never planned this.",
+"But you happened.",
+"And now my heart belongs to you ❤️"
+];
+let l=0,c=0;
+const typing=document.getElementById("typing");
+function type(){
+ if(c<lines[l].length){
+  typing.innerHTML+=lines[l][c++];
+  setTimeout(type,60);
+ }else{
+  setTimeout(()=>{
+   typing.innerHTML="";
+   c=0;
+   l=(l+1)%lines.length;
+   type();
+  },1600);
+ }
+}
+type();
+
+// Falling hearts
+const falling=document.querySelector('.falling');
+const icons=['❤️','🌹','💖','💘'];
+setInterval(()=>{
+ const s=document.createElement('span');
+ s.innerText=icons[Math.floor(Math.random()*icons.length)];
+ s.style.left=Math.random()*100+'vw';
+ s.style.animationDuration=3+Math.random()*5+'s';
+ falling.appendChild(s);
+ setTimeout(()=>s.remove(),8000);
+},300);
+
+// No runs away
+const no=document.getElementById("no");
+no.addEventListener("mouseover",()=>{
+ no.style.left=Math.random()*200-100+"px";
+ no.style.top=Math.random()*200-100+"px";
+});
+
+// Yes + confetti
+function yes(){
+ document.getElementById("response").innerHTML=
+ "You just made my heart explode with happiness 💞<br>Happy Valentine’s Day, CHOTTUUSS 💕";
+ for(let i=0;i<120;i++){
+  const c=document.createElement("div");
+  c.className="confetti";
+  c.style.left=Math.random()*100+"vw";
+  c.style.backgroundColor=`hsl(${Math.random()*360},100%,70%)`;
+  c.style.animationDuration=2+Math.random()*2+"s";
+  document.body.appendChild(c);
+  setTimeout(()=>c.remove(),4000);
+ }
+}
+
+// Music fallback
+document.addEventListener('click',()=>{
+ document.getElementById("music").play();
+},{once:true});
+</script>
+
+</body>
+</html>
